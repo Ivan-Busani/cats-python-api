@@ -1,0 +1,11 @@
+# Entornos y secretos
+.envs/.local/
+.envs/.production/
+.env
+.venv/
+
+# Python y Django
+__pycache__/
+*.py[cod]
+db.sqlite3
+/static/
