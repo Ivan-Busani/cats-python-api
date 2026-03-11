@@ -63,14 +63,13 @@ def cat_save(request):
         data = {**request.data, "api_used": "python"}
         cat = save_cat(data)
         return Response(cat, status=status.HTTP_201_CREATED)
-    except IntegrityError as e:
+    except Exception as e:
         if _is_duplicate_key_error(e):
             return Response(
                 {"detail": "Ya existe un gato con este ID en la base de datos"},
                 status=status.HTTP_409_CONFLICT,
             )
-        raise
-    except Exception:
+            
         return Response(
             {"detail": "Error al guardar el gato"},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -123,4 +122,9 @@ def cat_delete(request, id):
 
 def _is_duplicate_key_error(exc: BaseException) -> bool:
     msg = str(exc).lower()
-    return "unique" in msg or "duplicate key" in msg or "cats_cat_id" in msg
+    return (
+        "already exists" in msg 
+        or "unique" in msg 
+        or "duplicate key" in msg 
+        or "cats_cat_id" in msg
+    )
