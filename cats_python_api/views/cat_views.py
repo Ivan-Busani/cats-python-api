@@ -11,7 +11,7 @@ from cats_python_api.services.cat_services import save_cat
 @api_view(['GET'])
 def cats_list(request):
     try:
-        cats = Cat.objects.all()
+        cats = Cat.objects.order_by("-id")
         serializer = CatSerializer(cats, many=True)
         return Response(serializer.data)
     except Exception as e:
