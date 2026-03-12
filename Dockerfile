@@ -18,4 +18,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # 6. Execution command
-CMD ["gunicorn", "--bind", ":8080", "--workers", "2", "core.wsgi:application"]
+CMD ["gunicorn", "--bind", ":8004", "--workers", "2", "core.wsgi:application"]
